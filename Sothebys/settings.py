@@ -78,10 +78,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Sothebys',
-        'USER': 'root',
+        'USER': 'admin',
         'PASSWORD': 'randilovers',
         'HOST': 'db',
-        'PORT': 3306,
     }
 }
 

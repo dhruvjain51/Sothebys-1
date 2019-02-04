@@ -7,15 +7,20 @@ services:
     - "3306:3306"
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: randilovers
+      MYSQL_ROOT_PASSWORD: randilovers  
+      MYSQL_DATABASE: Sothebys
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: randilovers
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    restart: always
+    command: >
+      bash -c "python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000"      
     volumes:
       - .:/app
     ports:
       - "8000:8000"
     depends_on:
       - db
-    links:
-      - db
+
