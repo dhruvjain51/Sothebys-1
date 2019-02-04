@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Sothebys',
 ]
 
 MIDDLEWARE = [
@@ -76,9 +77,9 @@ WSGI_APPLICATION = 'Sothebys.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cs4501',
-        'USER': 'www',
-        'PASSWORD': '$3cureUS',
+        'NAME': 'Sothebys',
+        'USER': 'root',
+        'PASSWORD': 'randilovers',
         'HOST': 'db',
         'PORT': 3306,
     }

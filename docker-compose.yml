@@ -7,11 +7,7 @@ services:
     - "3306:3306"
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: docker
-      MYSQL_DATABASE: docker
-      MYSQL_USER: docker
-      MYSQL_PASSWORD: docker
-
+      MYSQL_ROOT_PASSWORD: randilovers
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -20,4 +16,6 @@ services:
     ports:
       - "8000:8000"
     depends_on:
+      - db
+    links:
       - db
