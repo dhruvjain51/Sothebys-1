@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'paintings',
     'accounts',
     'artists',
+    'reviews',
+    'orders',
 ]
 
 MIDDLEWARE = [
