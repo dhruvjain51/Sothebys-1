@@ -13,9 +13,9 @@ services:
       MYSQL_PASSWORD: randilovers
   web:
     build: .
-    restart: always #will not work without this
+    #restart: always #will not work without this
     command: >
-      bash -c "python manage.py makemigrations && python manage.py migrate
+      bash -c "./wait-for-it.sh db:3306 && python manage.py migrate
       && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
