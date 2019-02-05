@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'Sothebys',
     'paintings',
     'accounts',
+    'artists',
+    'reviews',
+    'orders',
 ]
 
 MIDDLEWARE = [
