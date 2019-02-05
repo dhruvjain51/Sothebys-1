@@ -1,6 +1,6 @@
 FROM tp33/django
 
-RUN mkdir /app
+WORKDIR /app
 
 COPY requirements.txt /app/
 
