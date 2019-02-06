@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = "accounts.User"
+
 
 WSGI_APPLICATION = 'Sothebys.wsgi.application'
 
