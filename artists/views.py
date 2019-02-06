@@ -20,17 +20,21 @@ def get_artists_by_id(request, id):
 def create_artist(request):
     if request.method == 'POST':
         form_data = ArtistForm(request.POST)
-        form = form_data.save()
-        id = form.id
-        data = list(Artist.objects.values().filter(id = id))
-        return JsonResponse(data, safe=False)
+        if form_data.is_valid():
+            form = form_data.save()
+            id = form.id
+            data = list(Artist.objects.values().filter(id = id))
+            return JsonResponse(data, safe=False)
+        else:
+            message = "Data was not entered correctly"
+            return JsonResponse({'status':'false','message':message}, status=400)
 
 
 @csrf_exempt
 def update_artist(request, id):
     if request.method == 'POST':
         try:
-            artist = Artist.objects.get(pk=id)
+            #artist = Artist.objects.get(pk=id)
 
             if 'name' in request.POST:
                 Artist.objects.filter(id = id).update(name = request.POST.get("name"))
@@ -50,14 +54,16 @@ def update_artist(request, id):
             if 'dod' in request.POST:
                 Artist.objects.filter(id = id).update(dod = request.POST.get("dod"))
 
-            return HttpResponse(status=200)
+            data = list(Artist.objects.values().filter(id = id))
+            return JsonResponse(data, safe=False)
 
         except:
-            return HttpResponse(status=400)
+            return JsonResponse({'status':'false'}, status=400)
 
 
 @csrf_exempt
 def delete_artist(request, id):
     if request.method == 'POST':
         Artist.objects.get(pk=id).delete()
-        return HttpResponse(status=200)
+        message = "Instance deleted"
+        return JsonResponse({'message':message}, status=200)
