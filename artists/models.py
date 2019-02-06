@@ -8,3 +8,4 @@ class Artist(models.Model):
     nationality = models.CharField(max_length=30)
     dob = models.DateTimeField(blank=True)
     dod = models.DateTimeField(blank=True)
+
