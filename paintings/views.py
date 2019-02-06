@@ -26,14 +26,31 @@ def create_painting(request):
 @csrf_exempt
 def update_painting(request, id):
     if request.method == 'POST':
-        painting = Painting.objects.get(pk=id)
-        form = PaintingForm(request.POST, instance=painting)
-        if form.is_valid():
-            form.save()
-            return HttpResponse(status=200)
-        else:
-            return HttpResponse(status=400)
+        try:
+            painting = Painting.objects.get(pk=id)
 
+            if 'title' in request.POST:
+                Painting.objects.filter(id = id).update(title = request.POST.get("title"))
+
+            if 'image' in request.POST:
+                Painting.objects.filter(id = id).update(image = request.POST.get("image"))
+
+            if 'description' in request.POST:
+                Painting.objects.filter(id = id).update(description = request.POST.get("description"))
+
+            if 'medium' in request.POST:
+                Painting.objects.filter(id = id).update(medium = request.POST.get("medium"))
+
+            if 'price' in request.POST:
+                Painting.objects.filter(id = id).update(price = request.POST.get("price"))
+
+            if 'artist' in request.POST:
+                Painting.objects.filter(id = id).update(artist = request.POST.get("artist"))
+
+            return HttpResponse(status=200)
+
+        except:
+            return HttpResponse(status=400)
 
 @csrf_exempt
 def delete_painting(request, id):
