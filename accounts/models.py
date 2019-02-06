@@ -9,6 +9,9 @@ class Buyer(models.Model):
     phone = models.CharField(max_length=50, default='DEFAULT VALUE')
     shipping = models.CharField(max_length=100, default='DEFAULT VALUE')
 
+    def __str__(self):
+        return self.first_name
+
 
 
 class Seller(models.Model):
@@ -19,3 +22,6 @@ class Seller(models.Model):
     phone = models.CharField(max_length=50, default='DEFAULT VALUE')
     description = models.CharField(max_length=150, default='DEFAULT VALUE')
     logo = models.CharField(max_length=150, default='DEFAULT VALUE')
+
+    def __str__(self):
+        return self.first_name

@@ -9,3 +9,5 @@ class Artist(models.Model):
     dob = models.DateTimeField(blank=True)
     dod = models.DateTimeField(blank=True)
 
+    def __str__(self):
+        return self.name
