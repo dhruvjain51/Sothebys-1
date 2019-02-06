@@ -16,6 +16,8 @@ class Buyer(models.Model):
     last_name = models.CharField(max_length=50, default='DEFAULT VALUE')
     phone = models.CharField(max_length=50, default='DEFAULT VALUE')
     shipping = models.CharField(max_length=100, default='DEFAULT VALUE')
+    order = models.ForeignKey(
+        'orders.Order', on_delete=models.CASCADE)
 
 
 class Seller(models.Model):
@@ -26,3 +28,5 @@ class Seller(models.Model):
     phone = models.CharField(max_length=50, default='DEFAULT VALUE')
     description = models.CharField(max_length=150, default='DEFAULT VALUE')
     logo = models.CharField(max_length=150, default='DEFAULT VALUE')
+    order = models.ForeignKey(
+        'orders.Order', on_delete=models.CASCADE)
