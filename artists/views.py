@@ -26,12 +26,30 @@ def create_artist(request):
 @csrf_exempt
 def update_artist(request, id):
     if request.method == 'POST':
-        artist = Artist.objects.get(pk=id)
-        form = ArtistForm(request.POST, instance=artist)
-        if form.is_valid():
-            form.save()
+        try:
+            artist = Artist.objects.get(pk=id)
+
+            if 'name' in request.POST:
+                Artist.objects.filter(id = id).update(name = request.POST.get("name"))
+
+            if 'image' in request.POST:
+                Artist.objects.filter(id = id).update(image = request.POST.get("image"))
+
+            if 'description' in request.POST:
+                Artist.objects.filter(id = id).update(description = request.POST.get("description"))
+
+            if 'nationality' in request.POST:
+                Artist.objects.filter(id = id).update(nationality = request.POST.get("nationality"))
+
+            if 'dob' in request.POST:
+                Artist.objects.filter(id = id).update(dob = request.POST.get("dob"))
+
+            if 'dod' in request.POST:
+                Artist.objects.filter(id = id).update(dod = request.POST.get("dod"))
+
             return HttpResponse(status=200)
-        else:
+
+        except:
             return HttpResponse(status=400)
 
 

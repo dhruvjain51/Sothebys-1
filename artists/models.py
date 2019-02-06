@@ -6,8 +6,8 @@ class Artist(models.Model):
     image = models.CharField(max_length=100)
     description = models.CharField(max_length=30)
     nationality = models.CharField(max_length=30)
-    dob = models.DateTimeField(blank=True)
-    dod = models.DateTimeField(blank=True)
+    dob = models.DateField(blank=True)
+    dod = models.DateField(blank=True)
 
     def __str__(self):
         return self.name
