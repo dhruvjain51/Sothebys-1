@@ -10,6 +10,7 @@ class Buyer(models.Model):
     shipping = models.CharField(max_length=100, default='DEFAULT VALUE')
 
 
+
 class Seller(models.Model):
     email = models.CharField(max_length=50, default='DEFAULT VALUE')
     password = models.CharField(max_length=50, default='DEFAULT VALUE')
