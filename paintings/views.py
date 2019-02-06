@@ -20,14 +20,20 @@ def get_paintings_by_id(request, id):
 def create_painting(request):
     if request.method == 'POST':
         form_data = PaintingForm(request.POST)
-        form_data.save()
-        return HttpResponse(status=200)
+        if form_data.is_valid():
+            form = form_data.save()
+            id = form.id
+            data = list(Painting.objects.values().filter(id = id))
+            return JsonResponse(data, safe=False)
+        else:
+            message = "Data was not entered correctly or not all fields included"
+            return JsonResponse({'status':'false','message':message}, status=400)
 
 @csrf_exempt
 def update_painting(request, id):
     if request.method == 'POST':
         try:
-            painting = Painting.objects.get(pk=id)
+            #painting = Painting.objects.get(pk=id)
 
             if 'title' in request.POST:
                 Painting.objects.filter(id = id).update(title = request.POST.get("title"))
@@ -47,13 +53,15 @@ def update_painting(request, id):
             if 'artist' in request.POST:
                 Painting.objects.filter(id = id).update(artist = request.POST.get("artist"))
 
-            return HttpResponse(status=200)
+            data = list(Painting.objects.values().filter(id = id))
+            return JsonResponse(data, safe=False)
 
         except:
-            return HttpResponse(status=400)
+            return JsonResponse({'status':'false'}, status=400)
 
 @csrf_exempt
 def delete_painting(request, id):
     if request.method == 'POST':
         Painting.objects.get(pk=id).delete()
-        return HttpResponse(status=200)
+        message = "Instance deleted"
+        return JsonResponse({'message':message}, status=200)
