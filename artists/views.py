@@ -20,8 +20,11 @@ def get_artists_by_id(request, id):
 def create_artist(request):
     if request.method == 'POST':
         form_data = ArtistForm(request.POST)
-        form_data.save()
-        return HttpResponse(status=200)
+        form = form_data.save()
+        id = form.id
+        data = list(Artist.objects.values().filter(id = id))
+        return JsonResponse(data, safe=False)
+
 
 @csrf_exempt
 def update_artist(request, id):
