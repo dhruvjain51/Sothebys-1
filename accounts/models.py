@@ -1,12 +1,4 @@
 from django.db import models
-# from django.contrib.auth.models import User
-# from django.contrib.auth.models import AbstractUser
-# from django.utils.encoding import smart_unicode
-#
-#
-# class User(AbstractUser):
-#     is_buyer = models.BooleanField('student status', default=False)
-#     is_seller = models.BooleanField('teacher status', default=False)
 
 
 class Buyer(models.Model):
