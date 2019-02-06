@@ -6,7 +6,8 @@ from django.db import models
 class Painting(models.Model):
     title = models.CharField(max_length=30)
     image = models.CharField(max_length=100)
-    artist = models.CharField(max_length=30)
     description = models.CharField(max_length=30)
     medium = models.CharField(max_length=30)
     price = models.IntegerField()
+    artist = models.ForeignKey(
+        'artists.Artist', on_delete=models.CASCADE)
