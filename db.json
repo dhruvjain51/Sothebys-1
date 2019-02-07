@@ -1,0 +1,259 @@
+[
+  {
+    "model": "paintings.painting",
+    "pk": 1,
+    "fields": {
+      "title": "Mona Lisa",
+      "image": "mona.jpeg",
+      "description": "Most stolen painting",
+      "medium": "Paint on canvas",
+      "price": 10000000,
+      "artist": 2
+    }
+  },
+  {
+    "model": "paintings.painting",
+    "pk": 2,
+    "fields": {
+      "title": "The Starry Night",
+      "image": "night.jpeg",
+      "description": "Very cool brushstrokes",
+      "medium": "Acrylic on Canvas",
+      "price": 5000000,
+      "artist": 1
+    }
+  },
+  {
+    "model": "paintings.painting",
+    "pk": 3,
+    "fields": {
+      "title": "The Last Supper",
+      "image": "supper.jpeg",
+      "description": "Everyone is hungry",
+      "medium": "water color on canvas",
+      "price": 1000000,
+      "artist": 3
+    }
+  },
+  {
+    "model": "paintings.painting",
+    "pk": 4,
+    "fields": {
+      "title": "The Birth of Venus",
+      "image": "venus.png",
+      "description": "Beauty personified",
+      "medium": "Painting on leather",
+      "price": 200,
+      "artist": 4
+    }
+  },
+  {
+    "model": "paintings.painting",
+    "pk": 5,
+    "fields": {
+      "title": "The Night Watch",
+      "image": "watch.jpeg",
+      "description": "Horses and watches",
+      "medium": "Oil on Canvas",
+      "price": 50000000,
+      "artist": 5
+    }
+  },
+  {
+    "model": "accounts.buyer",
+    "pk": 1,
+    "fields": {
+      "email": "bob@bob.com",
+      "password": "bob",
+      "first_name": "Bob",
+      "last_name": "Applegate",
+      "phone": "4345678901",
+      "shipping": "Richmond, Virginia"
+    }
+  },
+  {
+    "model": "accounts.buyer",
+    "pk": 2,
+    "fields": {
+      "email": "saad@khan.com",
+      "password": "uiop",
+      "first_name": "Saad",
+      "last_name": "Khan",
+      "phone": "123456789",
+      "shipping": "Beijing, China"
+    }
+  },
+  {
+    "model": "accounts.buyer",
+    "pk": 3,
+    "fields": {
+      "email": "smaran@thinka.com",
+      "password": "zxcvbn",
+      "first_name": "Smaran",
+      "last_name": "Syeda",
+      "phone": "23456789",
+      "shipping": "Arlington, VA"
+    }
+  },
+  {
+    "model": "accounts.buyer",
+    "pk": 4,
+    "fields": {
+      "email": "laal@khan.com",
+      "password": "pokjnbvfdfghj",
+      "first_name": "Laal",
+      "last_name": "Khan",
+      "phone": "345678929",
+      "shipping": "Amalfi Coast, Italy"
+    }
+  },
+  {
+    "model": "accounts.buyer",
+    "pk": 5,
+    "fields": {
+      "email": "shubi@sobti.com",
+      "password": "kjlasgdfkas",
+      "first_name": "Shubi",
+      "last_name": "Sobti",
+      "phone": "7346519837",
+      "shipping": "Lahore, Pakistan"
+    }
+  },
+  {
+    "model": "accounts.buyer",
+    "pk": 6,
+    "fields": {
+      "email": "ayush@alarmclock.com",
+      "password": "lsfdhlaslksdjg",
+      "first_name": "Ayush",
+      "last_name": "Shreya",
+      "phone": "3259823499438",
+      "shipping": "Colombo, Sri Lanka"
+    }
+  },
+  {
+    "model": "accounts.seller",
+    "pk": 1,
+    "fields": {
+      "email": "ronaldo@juve.com",
+      "password": "asgljkhaslgk",
+      "first_name": "Cristi",
+      "last_name": "Ronnie",
+      "phone": "4623462362",
+      "description": "football artist",
+      "logo": "ronnie.png"
+    }
+  },
+  {
+    "model": "accounts.seller",
+    "pk": 2,
+    "fields": {
+      "email": "tanvi@nyc.com",
+      "password": "adshgalsdbz",
+      "first_name": "Tanvi",
+      "last_name": "Bhatti",
+      "phone": "395239746",
+      "description": "Art collector",
+      "logo": "tanvi.png"
+    }
+  },
+  {
+    "model": "accounts.seller",
+    "pk": 3,
+    "fields": {
+      "email": "colgate@toothpaste.com",
+      "password": "dkhfgaskvac",
+      "first_name": "Colgate",
+      "last_name": "ProctorandGamble",
+      "phone": "09283590283410",
+      "description": "Hygiene collector",
+      "logo": "colgate.jpeg"
+    }
+  },
+  {
+    "model": "accounts.seller",
+    "pk": 4,
+    "fields": {
+      "email": "teresa@sullivan.com",
+      "password": "dsaklasldjga",
+      "first_name": "Teresa",
+      "last_name": "Sullivan",
+      "phone": "4395239785",
+      "description": "Art curator for UVA",
+      "logo": "teresa.png"
+    }
+  },
+  {
+    "model": "accounts.seller",
+    "pk": 5,
+    "fields": {
+      "email": "pink@dhinku.com",
+      "password": "jahslalsjdgh",
+      "first_name": "Pinky",
+      "last_name": "Lambda",
+      "phone": "347865293572",
+      "description": "Art curator at Guggenheim museum",
+      "logo": "pink.png"
+    }
+  },
+  {
+    "model": "artists.artist",
+    "pk": 1,
+    "fields": {
+      "name": "Atif Aslam",
+      "image": "atif.jpeg",
+      "description": "Creates sad sculptures",
+      "nationality": "Egyptian",
+      "dob": "2019-02-07",
+      "dod": "2019-03-01"
+    }
+  },
+  {
+    "model": "artists.artist",
+    "pk": 2,
+    "fields": {
+      "name": "Adnan Sami",
+      "image": "gogo.jpeg",
+      "description": "Water color master",
+      "nationality": "South African",
+      "dob": "2018-01-16",
+      "dod": "2019-10-18"
+    }
+  },
+  {
+    "model": "artists.artist",
+    "pk": 3,
+    "fields": {
+      "name": "Aamir Khan",
+      "image": "bhogo.jpeg",
+      "description": "Modern art",
+      "nationality": "Lithuanian",
+      "dob": "2000-01-16",
+      "dod": "2019-03-01"
+    }
+  },
+  {
+    "model": "artists.artist",
+    "pk": 4,
+    "fields": {
+      "name": "MF Hussain",
+      "image": "parvez.jpeg",
+      "description": "Paints horses",
+      "nationality": "Congolese",
+      "dob": "1910-02-27",
+      "dod": "2019-03-01"
+    }
+  },
+  {
+    "model": "artists.artist",
+    "pk": 5,
+    "fields": {
+      "name": "Frida Kahlo",
+      "image": "mona.jpeg",
+      "description": "Brilliant artist",
+      "nationality": "Mexican",
+      "dob": "1810-09-27",
+      "dod": "2000-12-03"
+    }
+  }
+]
