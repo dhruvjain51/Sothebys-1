@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 def get_buyers(request):
     data = list(Buyer.objects.values())
     return JsonResponse(data, safe=False)
-    
+
 
 @csrf_exempt
 def get_buyers_by_id(request, id):
@@ -36,7 +36,8 @@ def get_buyers_by_id(request, id):
             return JsonResponse(data, safe=False)
 
         except:
-            return JsonResponse({'status':'false'}, status=400)
+            message = "wrong format of POST body"
+            return JsonResponse({'message':message}, status=400)
 
 
 def get_sellers(request):
@@ -69,4 +70,5 @@ def get_sellers_by_id(request, id):
             return JsonResponse(data, safe=False)
 
         except:
-            return JsonResponse({'status':'false'}, status=400)
+            message = "wrong format of POST body"
+            return JsonResponse({'message':message}, status=400)

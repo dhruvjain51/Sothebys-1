@@ -15,6 +15,9 @@ def get_artists_by_id(request, id):
     if request.method == 'GET':
         data = list(Artist.objects.values().filter(id = id))
         return JsonResponse(data, safe=False)
+    else:
+        message = "must use GET"
+        return JsonResponse({'message':message}, status=400)
 
 @csrf_exempt
 def create_artist(request):
@@ -28,6 +31,9 @@ def create_artist(request):
         else:
             message = "Data was not entered correctly"
             return JsonResponse({'status':'false','message':message}, status=400)
+    else:
+        message = "must use POST"
+        return JsonResponse({'message':message}, status=400)
 
 
 @csrf_exempt
@@ -58,7 +64,11 @@ def update_artist(request, id):
             return JsonResponse(data, safe=False)
 
         except:
-            return JsonResponse({'status':'false'}, status=400)
+            message = "wrong format of POST body"
+            return JsonResponse({'message':message}, status=400)
+    else:
+        message = "must use POST"
+        return JsonResponse({'message':message}, status=400)
 
 
 @csrf_exempt
@@ -67,3 +77,6 @@ def delete_artist(request, id):
         Artist.objects.get(pk=id).delete()
         message = "Instance deleted"
         return JsonResponse({'message':message}, status=200)
+    else:
+        message = "must use POST"
+        return JsonResponse({'message':message}, status=400)

@@ -15,6 +15,9 @@ def get_paintings_by_id(request, id):
     if request.method == 'GET':
         data = list(Painting.objects.values().filter(id = id))
         return JsonResponse(data, safe=False)
+    else:
+        message = "must use GET"
+        return JsonResponse({'message':message}, status=400)
 
 @csrf_exempt
 def create_painting(request):
@@ -28,6 +31,10 @@ def create_painting(request):
         else:
             message = "Data was not entered correctly or not all fields included"
             return JsonResponse({'status':'false','message':message}, status=400)
+
+    else:
+        message = "must use POST"
+        return JsonResponse({'message':message}, status=400)
 
 @csrf_exempt
 def update_painting(request, id):
@@ -57,7 +64,11 @@ def update_painting(request, id):
             return JsonResponse(data, safe=False)
 
         except:
-            return JsonResponse({'status':'false'}, status=400)
+            message = "wrong format of POST body"
+            return JsonResponse({'message':message}, status=400)
+    else:
+        message = "must use POST"
+        return JsonResponse({'message':message}, status=400)
 
 @csrf_exempt
 def delete_painting(request, id):
@@ -65,3 +76,6 @@ def delete_painting(request, id):
         Painting.objects.get(pk=id).delete()
         message = "Instance deleted"
         return JsonResponse({'message':message}, status=200)
+    else:
+        message = "must use POST"
+        return JsonResponse({'message':message}, status=400)
