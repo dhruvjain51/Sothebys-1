@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 def get_buyers(request):
     data = list(Buyer.objects.values())
     return JsonResponse(data, safe=False)
+    
 
 @csrf_exempt
 def get_buyers_by_id(request, id):
@@ -17,13 +18,25 @@ def get_buyers_by_id(request, id):
         data = list(Buyer.objects.values().filter(id = id))
         return JsonResponse(data, safe=False)
     elif request.method == 'POST':
-        buyer = Buyer.objects.get(pk=id)
-        form = BuyerForm(request.POST, instance=buyer)
-        if form.is_valid():
-            form.save()
-            return HttpResponse(status=200)
-        else:
-            return HttpResponse(status=400)
+        try:
+            if 'email' in request.POST:
+                Buyer.objects.filter(id = id).update(email = request.POST.get("email"))
+            if 'password' in request.POST:
+                Buyer.objects.filter(id = id).update(password = request.POST.get("password"))
+            if 'first_name' in request.POST:
+                Buyer.objects.filter(id = id).update(first_name = request.POST.get("first_name"))
+            if 'last_name' in request.POST:
+                Buyer.objects.filter(id = id).update(last_name = request.POST.get("last_name"))
+            if 'phone' in request.POST:
+                Buyer.objects.filter(id = id).update(phone = request.POST.get("phone"))
+            if 'shipping' in request.POST:
+                Buyer.objects.filter(id = id).update(shipping = request.POST.get("shipping"))
+
+            data = list(Buyer.objects.values().filter(id = id))
+            return JsonResponse(data, safe=False)
+
+        except:
+            return JsonResponse({'status':'false'}, status=400)
 
 
 def get_sellers(request):
@@ -36,10 +49,24 @@ def get_sellers_by_id(request, id):
         data = list(Seller.objects.values().filter(id = id))
         return JsonResponse(data, safe=False)
     elif request.method == 'POST':
-        seller = Seller.objects.get(pk=id)
-        form = SellerForm(request.POST, instance=seller)
-        if form.is_valid():
-            form.save()
-            return HttpResponse(status=200)
-        else:
-            return HttpResponse(status=400)
+        try:
+            if 'email' in request.POST:
+                Seller.objects.filter(id = id).update(email = request.POST.get("email"))
+            if 'password' in request.POST:
+                Seller.objects.filter(id = id).update(password = request.POST.get("password"))
+            if 'first_name' in request.POST:
+                Seller.objects.filter(id = id).update(first_name = request.POST.get("first_name"))
+            if 'last_name' in request.POST:
+                Seller.objects.filter(id = id).update(last_name = request.POST.get("last_name"))
+            if 'phone' in request.POST:
+                Seller.objects.filter(id = id).update(phone = request.POST.get("phone"))
+            if 'description' in request.POST:
+                Seller.objects.filter(id = id).update(description = request.POST.get("description"))
+            if 'logo' in request.POST:
+                Seller.objects.filter(id = id).update(logo = request.POST.get("logo"))
+
+            data = list(Seller.objects.values().filter(id = id))
+            return JsonResponse(data, safe=False)
+
+        except:
+            return JsonResponse({'status':'false'}, status=400)
