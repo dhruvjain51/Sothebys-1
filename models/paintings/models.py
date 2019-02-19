@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 # from django.utils.encoding import smart_unicode
 
 
@@ -11,6 +12,7 @@ class Painting(models.Model):
     price = models.IntegerField()
     artist = models.ForeignKey(
         'artists.Artist', on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(default=datetime.now(), blank=True)
 
     def __str__(self):
         return self.title

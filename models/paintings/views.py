@@ -5,10 +5,12 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import PaintingForm
 
+
 # Create your views here.
 def get_paintings(request):
     data = list(Painting.objects.values())
     return JsonResponse(data, safe=False)
+
 
 @csrf_exempt
 def get_paintings_by_id(request, id):
@@ -18,6 +20,7 @@ def get_paintings_by_id(request, id):
     else:
         message = "must use GET"
         return JsonResponse({'message':message}, status=400)
+
 
 @csrf_exempt
 def create_painting(request):
@@ -35,6 +38,7 @@ def create_painting(request):
     else:
         message = "must use POST"
         return JsonResponse({'message':message}, status=400)
+
 
 @csrf_exempt
 def update_painting(request, id):
@@ -60,6 +64,9 @@ def update_painting(request, id):
             if 'artist' in request.POST:
                 Painting.objects.filter(id = id).update(artist = request.POST.get("artist"))
 
+            if 'timestamp' in request.POST:
+                Painting.objects.filter(id = id).update(artist = request.POST.get("timestamp"))
+
             data = list(Painting.objects.values().filter(id = id))
             return JsonResponse(data, safe=False)
 
@@ -69,6 +76,7 @@ def update_painting(request, id):
     else:
         message = "must use POST"
         return JsonResponse({'message':message}, status=400)
+
 
 @csrf_exempt
 def delete_painting(request, id):
