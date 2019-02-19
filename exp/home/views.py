@@ -8,8 +8,7 @@ import json
 def get_popular_paintings(request):
     response = requests.get('http://models-api:8000/api/v1/paintings/')
     json_data = json.loads(response.text)
-
-
-
-    # return requests.get('http://models-api:8000/api/v1/paintings/')
+    for element in json_data:
+        del element['medium']
+        del element['price']
     return HttpResponse(json_data)
