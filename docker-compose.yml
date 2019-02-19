@@ -12,15 +12,38 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: randilovers
   web:
-    build: .
+    build: ./web/.
+    container_name: web
+    links:
+      - exp:exp-api
+    command: >
+      bash -c "mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/web/web/wsgi.py"
+    volumes:
+      - ./web:/app
+    ports:
+      - "8000:8000"
+  exp:
+    build: ./exp/.
+    container_name: exp
+    links:
+      - models:models-api
+    command: >
+      bash -c "mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/exp/exp/wsgi.py"
+    volumes:
+      - ./exp:/app
+    ports:
+      - "8002:8000"
+  models:
+    build: ./models/.
+    container_name: models
     command: >
       bash -c "./wait-for-it.sh db:3306 && python manage.py makemigrations
       && python manage.py migrate
       && python manage.py loaddata db.json
-      && mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/Sothebys/wsgi.py"
+      && mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/models/models/wsgi.py"
     volumes:
-      - .:/app
+      - ./models:/app
     ports:
-      - "8000:8000"
+      - "8001:8000"
     depends_on:
       - db
