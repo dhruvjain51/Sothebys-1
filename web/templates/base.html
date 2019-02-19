@@ -1,0 +1,66 @@
+{% load static %}
+<html>
+<head>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" />
+   <!-- {% block extra_head_content %}{% endblock %} -->
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #1050b7;">
+    <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" style="color:white;" href="#">Sothebys</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="color:white !important;">
+        <li class="nav-item  active" style="color:white;">
+          <a class="nav-link" href="#" style="color:white;">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color:white;" href="#">Link</a>
+        </li>
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div id="wrap">
+    <div id = "main" class="content container clear-top">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+  </div>
+    <!-- Footer -->
+    	<section id="footer">
+    		<div class="container">
+    			<div class="row text-center text-xs-center text-sm-left text-md-left">
+    				<div class="col-xs-12 col-sm-6 col-md-6">
+
+    				</div>
+    				<div class="col-xs-12 col-sm-6 col-md-6">
+
+    				</div>
+
+    			</div>
+
+    			<div class="row">
+    				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+    					<p><u><a href="#">Sothebys</a></u> </p>
+    					<p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="https://www.sunlimetech.com" target="_blank"></a></p>
+    				</div>
+    				</hr>
+    			</div>
+    		</div>
+    	</section>
+    	<!-- ./Footer -->
+</body>
