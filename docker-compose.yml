@@ -17,7 +17,7 @@ services:
     links:
       - exp:exp-api
     command: >
-      bash -c "mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/web/web/wsgi.py"
+      bash -c "mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/web/wsgi.py"
     volumes:
       - ./web:/app
     ports:
@@ -28,7 +28,7 @@ services:
     links:
       - models:models-api
     command: >
-      bash -c "mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/exp/exp/wsgi.py"
+      bash -c "mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/exp/wsgi.py"
     volumes:
       - ./exp:/app
     ports:
@@ -40,7 +40,7 @@ services:
       bash -c "./wait-for-it.sh db:3306 && python manage.py makemigrations
       && python manage.py migrate
       && python manage.py loaddata db.json
-      && mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/models/models/wsgi.py"
+      && mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/Sothebys/wsgi.py"
     volumes:
       - ./models:/app
     ports:
