@@ -13,6 +13,6 @@ def get_recent_paintings(request):
         del element['medium']
         del element['price']
         del element['timestamp']
-    return HttpResponse(json_data)
+    return JsonResponse(json_data, safe=False)
 
 # def get_newest_paintings(request):
