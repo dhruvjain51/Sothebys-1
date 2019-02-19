@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-# from django.utils.encoding import smart_unicode
+from django.utils import timezone
 
 
 # Create your models here.
@@ -12,7 +12,7 @@ class Painting(models.Model):
     price = models.IntegerField()
     artist = models.ForeignKey(
         'artists.Artist', on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(default=datetime.now(), blank=True)
+    timestamp = models.DateTimeField(default=timezone.now(), blank=True)
 
     def __str__(self):
         return self.title

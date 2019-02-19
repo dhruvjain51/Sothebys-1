@@ -12,6 +12,10 @@ def get_paintings(request):
     return JsonResponse(data, safe=False)
 
 
+def get_latest_paintings(request, num):
+    data = list(Painting.objects.values().all().order_by('-timestamp')[:num])
+    return JsonResponse(data, safe=False)
+
 @csrf_exempt
 def get_paintings_by_id(request, id):
     if request.method == 'GET':
