@@ -8,3 +8,21 @@
 
 
 }
+
+.painting-title{
+  font-size: 25px;
+  margin-bottom: 20px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+.product-desc{
+  margin-top: 20px;
+}
+.product-desc p{
+  margin-top: 5px;
+
+}
+
+.product-desc button{
+  margin-top: 29px;
+
+}
