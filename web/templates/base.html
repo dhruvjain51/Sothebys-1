@@ -2,6 +2,7 @@
 <html>
 <head>
   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
    <!-- {% block extra_head_content %}{% endblock %} -->
 </head>
 <body>
@@ -32,12 +33,12 @@
 
 <div id="wrap">
     <div id = "main" class="content container clear-top">
-        <div class="row">
-            <div class="col-md-8">
+
+
             {% block content %}
             {% endblock %}
-            </div>
-        </div>
+
+
     </div>
   </div>
     <!-- Footer -->

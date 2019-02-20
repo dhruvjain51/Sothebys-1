@@ -8,13 +8,12 @@ import json
 # Create your views here.
 def get_home(request):
     r = requests.get('http://exp-api:8000/home/recent_paintings/')
-
-
     context = {
-        "products": r.json,
+        "latest_paintings": get_latest_paintings(),
     }
     return render(request, "home.html", context)
 
 
-
-# def get_latest_paintings():
+def get_latest_paintings():
+    r = requests.get('http://exp-api:8000/home/recent_paintings/')
+    return r.json
