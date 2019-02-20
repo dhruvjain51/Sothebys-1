@@ -66,3 +66,16 @@ To start the service, type the following command in the root directory of the pr
 $ docker-compose up
 ```
 
+# User Stories
+- As a prospective buyer I want to be able to learn more about a painting I like.
+
+- As a prospective buyer I want to see all the paintings of the artist whose painting/work I'm interested in.
+
+- As a user I want to be able to view the most recently added works.
+
+- As a seller I want to specify and display the price of my products.
+
+- As a user I want to have the information about the marketplace available to me so that I know where I am shopping. 
+
+- As a buyer I want to be able to read more about the artist of a work I'm interested in so that I can better understand the work.  
+
