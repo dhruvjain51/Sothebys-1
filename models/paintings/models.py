@@ -10,6 +10,8 @@ class Painting(models.Model):
     description = models.CharField(max_length=30)
     medium = models.CharField(max_length=30)
     price = models.IntegerField()
+    seller = models.ForeignKey(
+        'accounts.Seller', on_delete=models.CASCADE)
     artist = models.ForeignKey(
         'artists.Artist', on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now(), blank=True)

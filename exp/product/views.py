@@ -9,6 +9,7 @@ def get_paintings(request, id):
     json_data = json.loads(response.text)
     for element in json_data:
         element['artist_name'] = get_painting_artist(int(element['artist_id']))
+        element['seller_name'] = get_painting_seller(int(element['seller_id']))
     return JsonResponse(json_data, safe=False)
 
 
@@ -17,6 +18,11 @@ def get_painting_artist(id):
     response = requests.get('http://models-api:8000/api/v1/artists/' + str(id) + '/')
     json_data = json.loads(response.text)
     return json_data[0]['name']
+
+def get_painting_seller(id):
+    response = requests.get('http://models-api:8000/api/v1/sellers/' + str(id) + '/')
+    json_data = json.loads(response.text)
+    return json_data[0]['first_name'] + " " + json_data[0]['last_name']
 
 def get_all_by_artist(request, id):
     response = requests.get('http://models-api:8000/api/v1/paintings/')

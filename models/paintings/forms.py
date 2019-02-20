@@ -6,4 +6,4 @@ from .models import Painting
 class PaintingForm(ModelForm):
     class Meta:
         model = Painting
-        fields = ['title', 'image', 'description', 'medium', 'price', 'artist']
+        fields = ['title', 'image', 'description', 'medium', 'price', 'artist', 'seller']
