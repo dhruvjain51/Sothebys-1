@@ -7,4 +7,5 @@ app_name = 'home'
 
 urlpatterns = [
     path('home/recent_paintings/', views.get_recent_paintings),
+    path('home/banner/', views.get_banner),
 ]
