@@ -20,12 +20,43 @@
 </div>
 </div>
 
+
 <div class="row">
-  <div class="col-md-8 product-detailed-desc">
+
+  <div class="col-lg-7 col-md-8 col-sm-7 product-detailed-desc">
+    <h3 class="section-heading">Description </h3>
 {{painting_info.0.description}}
 </div>
 
+<div class="col-lg-4 col-md-4 col-sm-5 product-detailed-desc">
+<h3 class="section-heading">More by {{painting_info.0.artist_name}} </h3>
+<div class="row row-margin-bottom more_by">
+{% for painting in more_by %}
 
+     <div class="no-padding lib-item" >
+         <div class="lib-panel">
+             <div class="row box-shadow">
+                 <div class="col-md-6">
+                     <img class="lib-img-show" src="{{painting.image}}" height="130">
+                 </div>
+                 <div class="col-md-6">
+                     <div class="lib-row lib-header">
+                        {{painting.title}}
+                         <div class="lib-header-seperator"></div>
+                     </div>
+                     <!-- <div class="lib-row lib-desc">
+                         Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor
+                     </div> -->
+                 </div>
+             </div>
+         </div>
+     </div>
+
+{% endfor %}
+
+</div>
+
+</div>
 
 </section>
 {% endblock %}

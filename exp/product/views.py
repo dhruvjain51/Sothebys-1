@@ -25,6 +25,12 @@ def get_painting_seller(id):
     return json_data[0]['first_name'] + " " + json_data[0]['last_name']
 
 def get_all_by_artist(request, id):
+    # Changed by SHABAD, so that the id passed is the painting id, which i have in the front end, i get the artist id from the painting id here (NOTE FOR ROMAN)
+    res = requests.get('http://models-api:8000/api/v1/paintings/' + str(id) + '/')
+    js = json.loads(res.text)
+    id = js[0]['artist_id']
+
+
     response = requests.get('http://models-api:8000/api/v1/paintings/')
     json_paintings = json.loads(response.text)
 
