@@ -65,6 +65,20 @@
     }
   },
   {
+    "model": "paintings.painting",
+    "pk": 6,
+    "fields": {
+      "title": "Wanderer in the sea of mist",
+      "image": "watch.jpeg",
+      "description": "The mist is coming",
+      "medium": "Oil on Canvas",
+      "price": 150000000,
+      "artist": 2,
+      "seller": 2
+    }
+  },
+
+  {
     "model": "accounts.buyer",
     "pk": 1,
     "fields": {
