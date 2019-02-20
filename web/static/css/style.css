@@ -105,10 +105,13 @@
 
 .centered{
   position: absolute;
+  padding: 5px;
+  background-color: white;
+  opacity:0.8;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-font-size: 25px;
+font-size: 30px;
 font-weight: bold;
 color: #12026d;
 }
