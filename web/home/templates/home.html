@@ -2,6 +2,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<section id = "banner">
+<div class="row row-centered text-center">
+  {% for painting in banners %}
+  <div class="col-md-6" style = "position: relative;
+  text-align: center;
+  color: black;">
+    <img src="{{painting.image}}" alt="" width="400" height="400">
+    <div class="centered">{% cycle 'This is Sothebys' 'The new way to shop art' %}</div>
+
+  </div>
+{% endfor %}
+</div>
+</section>
+
+
 <section id ="recent_paintings">
 
 

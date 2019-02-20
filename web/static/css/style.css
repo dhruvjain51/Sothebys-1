@@ -101,3 +101,14 @@
 .no-padding {
     padding: 0;
 }
+
+
+.centered{
+  position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 25px;
+font-weight: bold;
+color: #12026d;
+}
