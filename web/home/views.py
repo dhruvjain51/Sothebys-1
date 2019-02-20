@@ -1,8 +1,7 @@
-from django.shortcuts import render
-import requests
-from django.http import HttpResponse
-from django.http import JsonResponse
 import json
+import requests
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render
 
 
 # Create your views here.
