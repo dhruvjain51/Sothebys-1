@@ -8,7 +8,8 @@
       "description": "Most stolen painting",
       "medium": "Paint on canvas",
       "price": 10000000,
-      "artist": 2
+      "artist": 2,
+      "seller": 1
     }
   },
   {
@@ -20,7 +21,8 @@
       "description": "Very cool brushstrokes",
       "medium": "Acrylic on Canvas",
       "price": 5000000,
-      "artist": 1
+      "artist": 1,
+      "seller": 1
     }
   },
   {
@@ -32,7 +34,8 @@
       "description": "Everyone is hungry",
       "medium": "water color on canvas",
       "price": 1000000,
-      "artist": 3
+      "artist": 3,
+      "seller": 1
     }
   },
   {
@@ -44,7 +47,8 @@
       "description": "Beauty personified",
       "medium": "Painting on leather",
       "price": 200,
-      "artist": 4
+      "artist": 4,
+      "seller": 2
     }
   },
   {
@@ -56,7 +60,8 @@
       "description": "Horses and watches",
       "medium": "Oil on Canvas",
       "price": 50000000,
-      "artist": 5
+      "artist": 5,
+      "seller": 2
     }
   },
   {
