@@ -6,7 +6,7 @@ from . import views
 app_name = 'artists'
 
 urlpatterns = [
-    path('api/v1/artists/', views.get_artists),
+    path('api/v1/artists/', views.get_artists, name='get_artists'),
     path('api/v1/artists/<int:id>/', views.get_artists_by_id),
     path('api/v1/artists/create/', views.create_artist),
     path('api/v1/artists/<int:id>/update/', views.update_artist),
