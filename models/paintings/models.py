@@ -6,7 +6,7 @@ from django.utils import timezone
 # Create your models here.
 class Painting(models.Model):
     title = models.CharField(max_length=30)
-    image = models.CharField(max_length=100)
+    image = models.CharField(max_length=250)
     description = models.CharField(max_length=30)
     medium = models.CharField(max_length=30)
     price = models.IntegerField()

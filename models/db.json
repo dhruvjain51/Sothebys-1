@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "title": "Mona Lisa",
-      "image": "mona.jpeg",
+      "image": "https://cdn.britannica.com/s:300x500/24/189624-131-BAF1184D.jpg",
       "description": "Most stolen painting",
       "medium": "Paint on canvas",
       "price": 10000000,
@@ -17,7 +17,7 @@
     "pk": 2,
     "fields": {
       "title": "The Starry Night",
-      "image": "night.jpeg",
+      "image": "https://www.theartist.me/wp-content/uploads/2016/05/the-starry-night.jpg",
       "description": "Very cool brushstrokes",
       "medium": "Acrylic on Canvas",
       "price": 5000000,
@@ -30,7 +30,7 @@
     "pk": 3,
     "fields": {
       "title": "The Last Supper",
-      "image": "supper.jpeg",
+      "image": "https://static.artbible.info/large/laatsteavondmaal_duccio.jpg",
       "description": "Everyone is hungry",
       "medium": "water color on canvas",
       "price": 1000000,
@@ -43,7 +43,7 @@
     "pk": 4,
     "fields": {
       "title": "The Birth of Venus",
-      "image": "venus.png",
+      "image": "https://images.fineartamerica.com/images-medium-large/birth-of-venus-sandro-botticelli.jpg",
       "description": "Beauty personified",
       "medium": "Painting on leather",
       "price": 200,
@@ -56,7 +56,7 @@
     "pk": 5,
     "fields": {
       "title": "The Night Watch",
-      "image": "watch.jpeg",
+      "image": "https://a.1stdibscdn.com/archivesE/upload/a_1052/1487457056803/HR_Ode_to_Rembrandts_NIght_Watch_with_Halaceli_E2_l.jpg",
       "description": "Horses and watches",
       "medium": "Oil on Canvas",
       "price": 50000000,
@@ -68,8 +68,8 @@
     "model": "paintings.painting",
     "pk": 6,
     "fields": {
-      "title": "Wanderer in the sea of mist",
-      "image": "watch.jpeg",
+      "title": "The Night Watch",
+      "image": "https://www.artble.com/imgs/3/f/4/534414/wanderer_above_the_sea_of_fog.jpg",
       "description": "The mist is coming",
       "medium": "Oil on Canvas",
       "price": 150000000,
