@@ -5,6 +5,10 @@ from .models import Buyer, Seller
 from django.http import JsonResponse
 from .forms import BuyerForm, SellerForm
 from django.views.decorators.csrf import csrf_exempt
+import os
+import hmac
+from django.conf import settings
+
 
 # Create your views here.
 def get_buyers(request):
@@ -72,3 +76,13 @@ def get_sellers_by_id(request, id):
         except:
             message = "wrong format of POST body"
             return JsonResponse({'message':message}, status=400)
+
+
+def generate_authenticator():
+    authenticator = hmac.new(
+        key = settings.SECRET_KEY.encode('utf-8'),
+        msg = os.urandom(32),
+        digestmod = 'sha256',
+    ).hexdigest()
+
+    return authenticator
