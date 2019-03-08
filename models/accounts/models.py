@@ -1,5 +1,6 @@
 from django.db import models
-
+from datetime import datetime
+from django.utils import timezone
 
 class Buyer(models.Model):
     email = models.CharField(max_length=50, default='DEFAULT VALUE')
@@ -25,3 +26,12 @@ class Seller(models.Model):
 
     def __str__(self):
         return self.first_name
+
+class Authenticator(models.Model):
+    authenticator = models.CharField(max_length=50, default='DEFAULT VALUE')
+    user_id = models.ForeignKey(
+        'accounts.Buyer', on_delete=models.CASCADE)
+    date_created = models.DateTimeField(default=timezone.now(), blank=True)
+
+    def __str__(self):
+        return self.authenticator
