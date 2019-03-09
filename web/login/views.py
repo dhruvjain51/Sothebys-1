@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import SellerRegisterForm
 from django.http import HttpResponseRedirect
+import requests
 
 
 # Create your views here.
@@ -22,7 +23,16 @@ def get_signup(request):
             logo = form.cleaned_data['logo']
             description = form.cleaned_data['description']
             # SEND POST REQ TO EXP API
-            message = "Success, you have been registered on Sothebys!"
+            post_data = {'email': email, 'password': password, 'phone': phone,
+                         'description': description, 'first_name': first_name, 'last_name': last_name, 'logo': logo}
+            response = requests.post(
+                'http://exp-api:8000/seller/create/', data=post_data)
+            status = response.status_code
+            if status == 200:
+                message = "You have been Registered Successfully"
+            else:
+                message = "Sorry there was an error"
+
     else:
         form = SellerRegisterForm()
         message = "We are excited as you join us"
