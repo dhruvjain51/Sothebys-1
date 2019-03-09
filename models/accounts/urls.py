@@ -10,4 +10,5 @@ urlpatterns = [
     path('api/v1/buyers/<int:id>/', views.get_buyers_by_id),
     path('api/v1/sellers/', views.get_sellers, name='get_sellers'),
     path('api/v1/sellers/<int:id>/', views.get_sellers_by_id),
+    path('api/v1/sellers/create/', views.create_seller),
 ]
