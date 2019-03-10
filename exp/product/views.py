@@ -25,9 +25,16 @@ def create_painting(request):
         medium = request.POST['medium']
         price = request.POST['price']
         artist = request.POST['artist']
+        auth = request.POST['auth']
         seller = request.POST['seller']
         # Make POST Request with all this data
-        post_data = {'title': title, 'image': image, 'description': description, 'medium': medium, 'price': price, 'artist': artist, 'seller': seller}
+
+        # First we check if the supplied auth token even exists in the DB
+
+        # If it exists, we get the user id, and post as normal,
+    # If not, we send error with some message that login failed.
+        post_data = {'title': title, 'image': image, 'description': description,
+                     'medium': medium, 'price': price, 'artist': artist, 'seller': seller}
         response = requests.post('http://models-api:8000/api/v1/paintings/create/', data=post_data)
         status = response.status_code
         if status == 200:
@@ -68,8 +75,6 @@ def get_all_by_artist(request, id):
     for rem in to_remove:
         json_paintings.remove(rem)
 
-
-
     # alternative method of removing from list
 
     # done = False
@@ -84,6 +89,7 @@ def get_all_by_artist(request, id):
 
     return JsonResponse(json_paintings, safe=False)
 
+
 def get_all_artists(request):
     response = requests.get('http://models-api:8000/api/v1/artists/')
     json_data = json.loads(response.text)
@@ -94,4 +100,4 @@ def get_all_artists(request):
         del element['nationality']
         del element['dob']
         del element['dod']
-    return JsonResponse(json_data, safe = False)
+    return JsonResponse(json_data, safe=False)

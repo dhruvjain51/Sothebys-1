@@ -17,6 +17,20 @@ def get_buyers(request):
 
 
 @csrf_exempt
+def check_auth(request):
+    if request.method == "POST":
+        auth = request.POST['auth']
+        if Authenticator.objects.filter(authenticator=auth):
+            authen = Authenticator.objects.filter(authenticator=auth).first()
+            user_id = authen.user_id.id
+            return JsonResponse({'status': 200, 'user_id': user_id}, status=200)
+        else:
+            return JsonResponse({'status': 400, 'message': "Couldnt verify identity"}, status=400)
+    else:
+        return JsonResponse({'status': 400, 'message': "Has to be a POST"}, status=400)
+
+
+@csrf_exempt
 def get_buyers_by_id(request, id):
     if request.method == 'GET':
         data = list(Buyer.objects.values().filter(id=id))
