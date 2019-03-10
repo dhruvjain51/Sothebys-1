@@ -26,24 +26,37 @@ def create_painting(request):
         price = request.POST['price']
         artist = request.POST['artist']
         auth = request.POST['auth']
-        seller = request.POST['seller']
-        # Make POST Request with all this data
-
+        # seller = request.POST['seller']
         # First we check if the supplied auth token even exists in the DB
-
-        # If it exists, we get the user id, and post as normal,
-    # If not, we send error with some message that login failed.
+        auth_check = check_auth(auth)
+        if auth_check is 0:  # Auth Failed
+            return JsonResponse({'status': 400, 'login': 0}, safe=False, status=200)
+        else:
+            seller = auth_check
+            # If it exists, we get the user id, and post as normal,
+            # If not, we send error with some message that login failed.
         post_data = {'title': title, 'image': image, 'description': description,
                      'medium': medium, 'price': price, 'artist': artist, 'seller': seller}
         response = requests.post('http://models-api:8000/api/v1/paintings/create/', data=post_data)
         status = response.status_code
         if status == 200:
-            return JsonResponse("Success", safe=False, status=200)
+            return JsonResponse({'status': 200, 'login': 1, 'message': "Success"}, safe=False, status=200)
         else:
-            return JsonResponse("Error", safe=False, status=400)
+            return JsonResponse({'status': 400, 'login': 1, 'message': "Error"}, safe=False, status=400)
 
     if request.method == "GET":
         return HttpResponse("Has to be a POST Request")
+
+
+def check_auth(auth):
+    post_data_auth = {'auth': auth}
+    response_auth = requests.post(
+        'http://models-api:8000/api/v1/auth/', data=post_data_auth)
+    json_data_auth = json.loads(response_auth.text)
+    if json_data_auth['status'] is 400:
+        return 0
+    else:
+        return json_data_auth['user_id']
 
 
 def get_painting_artist(id):

@@ -3,6 +3,7 @@ from .forms import CreatePaintingForm
 from django.http import HttpResponseRedirect, HttpResponse
 import requests
 from django.urls import reverse
+import json
 
 
 def create_painting(request):
@@ -26,7 +27,10 @@ def create_painting(request):
 
             status = create_painting_exp_api(auth, title, image, description, medium, price, artist)
 
-            if status == 200:
+            if status['login'] is 0:
+                return HttpResponseRedirect(reverse("login:login-home") + "?next=" + reverse("paintings:create_painting"))
+
+            if status['status'] == 200:
                 message = "Your item has been added Successfully"
                 return render(request, "create.html", {'form': form, 'message': message})
             else:
@@ -40,11 +44,10 @@ def create_painting(request):
 
 def create_painting_exp_api(auth, title, image, description, medium, price, artist):
     post_data = {'title': title, 'image': image, 'description': description,
-                 'medium': medium, 'price': price, 'artist': artist}
+                 'medium': medium, 'price': price, 'artist': artist, 'auth': auth}
     response = requests.post(
         'http://exp-api:8000/product/create/', data=post_data)
     json_data = json.loads(response.text)
-
-    return response.text
+    return json_data
     # Call Exp API, pass everything form data.
     # Get result, return json result

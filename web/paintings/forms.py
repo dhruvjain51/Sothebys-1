@@ -8,4 +8,3 @@ class CreatePaintingForm(forms.Form):
     medium = forms.CharField(label='Medium', max_length=100)
     price = forms.CharField(label='Price', max_length=300)
     artist = forms.CharField(label='Artist', max_length=200)
-    seller = forms.CharField(label='Seller', max_length=200)
