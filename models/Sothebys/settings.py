@@ -84,12 +84,13 @@ WSGI_APPLICATION = 'Sothebys.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Sothebys',
-        'USER': 'admin',
-        'PASSWORD': 'randilovers',
+        'NAME': 'cs4501',
+        'USER': 'www',
+        'PASSWORD': '$3cureUS',
         'HOST': 'db',
     }
 }
+
 
 
 # Password validation
