@@ -20,8 +20,6 @@ def get_paintings(request, id):
 def create_paintings(request):
     if request.method == "POST":
         auth = request.POST['auth']
-        # Get all the other data, and stuff of painting, hit the models API, and return either success or failiure
-        #
         return JsonResponse(json_data, safe=False)
     else:
         return HttpResponse("Has to be a POST Request")

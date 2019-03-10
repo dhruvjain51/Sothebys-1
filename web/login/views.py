@@ -15,14 +15,11 @@ def get_login(request):
             password = form.cleaned_data['password']
             next = request.GET.get('next') or reverse('home:home')
             resp = login_exp_api(email, password)
-
             if resp['status'] is 200:
                 authenticator = resp['auth']
                 response = HttpResponseRedirect(next)
                 response.set_cookie("auth", authenticator)
-
                 return response
-
             else:
                 return render(request, "login.html", {'form': form, 'message': "Error"})
 
@@ -38,8 +35,6 @@ def login_exp_api(email, password):
     json_data = json.loads(response.text)
     return json_data
 
-    # RSend the details to login EXP API, and expect to get back an auth token
-
 
 def get_signup(request):
     if request.method == "POST":
@@ -52,7 +47,6 @@ def get_signup(request):
             phone = form.cleaned_data['phone']
             logo = form.cleaned_data['logo']
             description = form.cleaned_data['description']
-            # SEND POST REQ TO EXP API
             post_data = {'email': email, 'password': password, 'phone': phone,
                          'description': description, 'first_name': first_name, 'last_name': last_name, 'logo': logo}
             response = requests.post(

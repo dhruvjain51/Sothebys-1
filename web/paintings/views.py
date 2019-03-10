@@ -20,5 +20,6 @@ def create_painting(request):
 
 
 def create_painting_exp_api(auth):
+    a = 3
     # Call Exp API, pass everything form data.
     # Get result, return json result
