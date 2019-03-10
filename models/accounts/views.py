@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Buyer, Seller
 from django.http import HttpResponse
-from .models import Buyer, Seller
+from .models import Buyer, Seller, Authenticator
 from django.http import JsonResponse
 from .forms import BuyerForm, SellerForm
 from django.views.decorators.csrf import csrf_exempt
@@ -60,6 +60,27 @@ def create_seller(request):
     else:
         message = "must use POST"
         return JsonResponse({'message': message}, status=400)
+
+
+@csrf_exempt
+def login_seller(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        if Seller.objects.filter(email=email, password=password):
+            auth_code = generate_authenticator()
+            authen = Authenticator(authenticator=auth_code,
+                                   user_id=Seller.objects.filter(email=email, password=password).first())
+            authen.save()
+            # This person can now login, lets add his details to the authenticator model
+            return JsonResponse({'auth': auth_code}, safe=False, status=200)
+
+        else:
+            message = "Data was not entered correctly or not all fields included"
+            return JsonResponse("Error", status=400, safe=False)
+    else:
+        message = "must use POST"
+        return JsonResponse({'message': message}, status=400, safe=False)
 
 
 def get_sellers(request):

@@ -29,7 +29,7 @@ class Seller(models.Model):
 
 
 class Authenticator(models.Model):
-    authenticator = models.CharField(max_length=50, default='DEFAULT VALUE')
+    authenticator = models.CharField(max_length=300, default='DEFAULT VALUE')
     user_id = models.ForeignKey(
         'accounts.Seller', on_delete=models.CASCADE)
     date_created = models.DateTimeField(default=timezone.now(), blank=True)

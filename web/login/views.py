@@ -2,19 +2,44 @@ from django.shortcuts import render
 from .forms import SellerRegisterForm, SellerLoginForm
 from django.http import HttpResponseRedirect
 import requests
+from django.urls import reverse
 
 
 # Create your views here.
 def get_login(request):
-    if request.method == "POST":
-        # Do somethign
-        a = 4
-    else:
-        form = SellerLoginForm
-        return render(request, "login.html", {'form': form})
+    form = SellerLoginForm
+    return render(request, "login.html", {'form': form})
+    # if request.method == "POST":
+    #     form = SellerLoginForm(request.POST)
+    #     if not form.is_valid:
+    #         return render(request, "login.html", {'form': form, 'error': "There was an error"})
+    #     email = form.cleaned_data['email']
+    #     password = form.cleaned_data['password']
+    #     next = request.GET.get('next') or reverse('home:home')
+    #     # resp = login_exp_api(email, password)
+    #
+    #     # Error here, login failed or something
+    #     # if not resp.status_code is 200:
+    #     #     return render('login.html', {'form': form, 'error': "There was an error"})
+    #
+    #     """ If we made it here, we can log them in. """
+    #     # Set their login cookie and redirect to back to wherever they came from
+    #     # authenticator = resp['resp']['authenticator']
+    #     response = HttpResponseRedirect(next)
+    #     # response.set_cookie("auth", authenticator)
+    #     return response
+    # else:
 
 
-# Register for the seller
+# def login_exp_api(email, password):
+#     post_data = {'email': email, 'password': password}
+#     response = requests.post(
+#         'http://exp-api:8000/seller/login/', data=post_data)
+#     return response
+
+    # RSend the details to login EXP API, and expect to get back an auth token
+
+
 def get_signup(request):
     if request.method == "POST":
         form = SellerRegisterForm(request.POST)
