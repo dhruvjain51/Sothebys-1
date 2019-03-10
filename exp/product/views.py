@@ -68,6 +68,8 @@ def get_all_by_artist(request, id):
     for rem in to_remove:
         json_paintings.remove(rem)
 
+
+
     # alternative method of removing from list
 
     # done = False
@@ -81,3 +83,15 @@ def get_all_by_artist(request, id):
     #         done = True
 
     return JsonResponse(json_paintings, safe=False)
+
+def get_all_artists(request):
+    response = requests.get('http://models-api:8000/api/v1/artists/')
+    json_data = json.loads(response.text)
+
+    for element in json_data:
+        del element['image']
+        del element['description']
+        del element['nationality']
+        del element['dob']
+        del element['dod']
+    return JsonResponse(json_data, safe = False)

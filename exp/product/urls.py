@@ -9,4 +9,5 @@ urlpatterns = [
     path('product/<int:id>/', views.get_paintings),
     path('product/more_by/<int:id>/', views.get_all_by_artist),
     path('product/create/', views.create_painting),
+    path('product/getallartists/', views.get_all_artists),
 ]
