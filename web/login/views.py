@@ -13,12 +13,16 @@ def get_login(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            # next = request.GET.get('next') or reverse('home:home')
+            next = request.GET.get('next') or reverse('home:home')
             resp = login_exp_api(email, password)
 
             if resp['status'] is 200:
                 authenticator = resp['auth']
-                return render(request, "login.html", {'form': form, 'message': "Login Success Baby"})
+                response = HttpResponseRedirect(next)
+                response.set_cookie("auth", authenticator)
+
+                return response
+
             else:
                 return render(request, "login.html", {'form': form, 'message': "Error"})
 

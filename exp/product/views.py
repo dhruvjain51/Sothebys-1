@@ -2,8 +2,11 @@ from django.shortcuts import render
 import requests
 import json
 from django.http import JsonResponse
-
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
+
+
 def get_paintings(request, id):
     response = requests.get('http://models-api:8000/api/v1/paintings/' + str(id) + '/')
     json_data = json.loads(response.text)
@@ -13,23 +16,34 @@ def get_paintings(request, id):
     return JsonResponse(json_data, safe=False)
 
 
+@csrf_exempt
+def create_paintings(request):
+    if request.method == "POST":
+        auth = request.POST['auth']
+        # Get all the other data, and stuff of painting, hit the models API, and return either success or failiure
+        #
+        return JsonResponse(json_data, safe=False)
+    else:
+        return HttpResponse("Has to be a POST Request")
+
 
 def get_painting_artist(id):
     response = requests.get('http://models-api:8000/api/v1/artists/' + str(id) + '/')
     json_data = json.loads(response.text)
     return json_data[0]['name']
 
+
 def get_painting_seller(id):
     response = requests.get('http://models-api:8000/api/v1/sellers/' + str(id) + '/')
     json_data = json.loads(response.text)
     return json_data[0]['first_name'] + " " + json_data[0]['last_name']
+
 
 def get_all_by_artist(request, id):
     # Changed by SHABAD, so that the id passed is the painting id, which i have in the front end, i get the artist id from the painting id here (NOTE FOR ROMAN)
     res = requests.get('http://models-api:8000/api/v1/paintings/' + str(id) + '/')
     js = json.loads(res.text)
     id = js[0]['artist_id']
-
 
     response = requests.get('http://models-api:8000/api/v1/paintings/')
     json_paintings = json.loads(response.text)
