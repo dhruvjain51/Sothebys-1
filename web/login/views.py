@@ -1,13 +1,17 @@
 from django.shortcuts import render
-from .forms import SellerRegisterForm
+from .forms import SellerRegisterForm, SellerLoginForm
 from django.http import HttpResponseRedirect
 import requests
 
 
 # Create your views here.
 def get_login(request):
-    if request.method == "GET":
-        return render(request, "login.html")
+    if request.method == "POST":
+        # Do somethign
+        a = 4
+    else:
+        form = SellerLoginForm
+        return render(request, "login.html", {'form': form})
 
 
 # Register for the seller

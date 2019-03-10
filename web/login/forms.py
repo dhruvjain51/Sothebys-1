@@ -9,3 +9,8 @@ class SellerRegisterForm(forms.Form):
     phone = forms.CharField(label='Phone', max_length=100)
     description = forms.CharField(label='Description', max_length=300)
     logo = forms.CharField(label='Logo Link', max_length=200)
+
+
+class SellerLoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput())
