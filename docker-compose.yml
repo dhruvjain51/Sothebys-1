@@ -1,19 +1,25 @@
 version: '3'
 
 services:
-  db:
-    image: mysql:5.7.23
+  models:
+    build: ./models/.
+    container_name: models
+    network_mode: "bridge"
+    external_links:
+      - mysql:db
+    command: >
+      bash -c "python manage.py makemigrations
+      && python manage.py migrate
+      && python manage.py loaddata db.json
+      && mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/Sothebys/wsgi.py"
+    volumes:
+      - ./models:/app
     ports:
-    - "3306:3306"
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: randilovers
-      MYSQL_DATABASE: Sothebys
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: randilovers
+      - "8001:8000"
   web:
     build: ./web/.
     container_name: web
+    network_mode: "bridge"
     links:
       - exp:exp-api
     command: >
@@ -25,6 +31,7 @@ services:
   exp:
     build: ./exp/.
     container_name: exp
+    network_mode: "bridge"
     links:
       - models:models-api
     command: >
@@ -33,17 +40,4 @@ services:
       - ./exp:/app
     ports:
       - "8002:8000"
-  models:
-    build: ./models/.
-    container_name: models
-    command: >
-      bash -c "./wait-for-it.sh db:3306 && python manage.py makemigrations
-      && python manage.py migrate
-      && python manage.py loaddata db.json
-      && mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/Sothebys/wsgi.py"
-    volumes:
-      - ./models:/app
-    ports:
-      - "8001:8000"
-    depends_on:
-      - db
+
