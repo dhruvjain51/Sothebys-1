@@ -17,11 +17,25 @@ def get_paintings(request, id):
 
 
 @csrf_exempt
-def create_paintings(request):
+def create_painting(request):
     if request.method == "POST":
-        auth = request.POST['auth']
-        return JsonResponse(json_data, safe=False)
-    else:
+        title = request.POST['title']
+        image = request.POST['image']
+        description = request.POST['description']
+        medium = request.POST['medium']
+        price = request.POST['price']
+        artist = request.POST['artist']
+        seller = request.POST['seller']
+        # Make POST Request with all this data
+        post_data = {'title': title, 'image': image, 'description': description, 'medium': medium, 'price': price, 'artist': artist, 'seller': seller}
+        response = requests.post('http://models-api:8000/api/v1/paintings/create/', data=post_data)
+        status = response.status_code
+        if status == 200:
+            return JsonResponse("Success", safe=False, status=200)
+        else:
+            return JsonResponse("Error", safe=False, status=400)
+
+    if request.method == "GET":
         return HttpResponse("Has to be a POST Request")
 
 
