@@ -7,4 +7,5 @@ app_name = 'seller'
 
 urlpatterns = [
     path('seller/create/', views.create_seller),
+    path('seller/login/', views.login_seller),
 ]

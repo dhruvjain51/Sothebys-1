@@ -1,41 +1,38 @@
 from django.shortcuts import render
 from .forms import SellerRegisterForm, SellerLoginForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 import requests
 from django.urls import reverse
+import json
 
 
 # Create your views here.
 def get_login(request):
-    form = SellerLoginForm
-    return render(request, "login.html", {'form': form})
-    # if request.method == "POST":
-    #     form = SellerLoginForm(request.POST)
-    #     if not form.is_valid:
-    #         return render(request, "login.html", {'form': form, 'error': "There was an error"})
-    #     email = form.cleaned_data['email']
-    #     password = form.cleaned_data['password']
-    #     next = request.GET.get('next') or reverse('home:home')
-    #     # resp = login_exp_api(email, password)
-    #
-    #     # Error here, login failed or something
-    #     # if not resp.status_code is 200:
-    #     #     return render('login.html', {'form': form, 'error': "There was an error"})
-    #
-    #     """ If we made it here, we can log them in. """
-    #     # Set their login cookie and redirect to back to wherever they came from
-    #     # authenticator = resp['resp']['authenticator']
-    #     response = HttpResponseRedirect(next)
-    #     # response.set_cookie("auth", authenticator)
-    #     return response
-    # else:
+    if request.method == "POST":
+        form = SellerLoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            # next = request.GET.get('next') or reverse('home:home')
+            resp = login_exp_api(email, password)
+
+            if resp['status'] is 200:
+                authenticator = resp['auth']
+                return render(request, "login.html", {'form': form, 'message': "Login Success Baby"})
+            else:
+                return render(request, "login.html", {'form': form, 'message': "Error"})
+
+    if request.method == "GET":
+        forma = SellerLoginForm()
+        return render(request, "login.html", {'form': forma, 'message': ""})
 
 
-# def login_exp_api(email, password):
-#     post_data = {'email': email, 'password': password}
-#     response = requests.post(
-#         'http://exp-api:8000/seller/login/', data=post_data)
-#     return response
+def login_exp_api(email, password):
+    post_data = {'email': email, 'password': password}
+    response = requests.post(
+        'http://exp-api:8000/seller/login/', data=post_data)
+    json_data = json.loads(response.text)
+    return json_data
 
     # RSend the details to login EXP API, and expect to get back an auth token
 
