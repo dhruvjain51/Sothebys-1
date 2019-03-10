@@ -7,4 +7,4 @@ class CreatePaintingForm(forms.Form):
     description = forms.CharField(label='Description', max_length=100)
     medium = forms.CharField(label='Medium', max_length=100)
     price = forms.CharField(label='Price', max_length=300)
-    artist = forms.CharField(label='Artist', max_length=200)
+    artist = forms.CharField(label='Artist ID', max_length=200)
