@@ -8,6 +8,7 @@ app_name = 'paintings'
 
 urlpatterns = [
     path('create/', views.create_painting, name='create_painting'),
+    path('search/', views.get_search_results, name='search_paintings')
 ]
 
 urlpatterns += staticfiles_urlpatterns()

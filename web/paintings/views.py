@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 import requests
 from django.urls import reverse
 import json
+from django.views.decorators.csrf import csrf_exempt
 
 
 def create_painting(request):
@@ -51,3 +52,31 @@ def create_painting_exp_api(auth, title, image, description, medium, price, arti
     return json_data
     # Call Exp API, pass everything form data.
     # Get result, return json result
+
+@csrf_exempt
+def get_search_results(request):
+    query = request.POST['query']
+    post_data = {'query': query}
+    if query == "":
+        message = "Please enter a valid search query"
+        context = {
+            "query": "",
+            "message": message
+        }
+        return render(request, "search.html", context)
+    else:
+        r = requests.post('http://exp-api:8000/product/search/', data=post_data)
+        if r.json == []:
+            message = "No valid results"
+            context = {
+                "query": "",
+                "message": message
+            }
+            return render(request, "search.html", context)
+        else:
+            message = "Here are you search results"
+            context = {
+                "query": r.json,
+                "message": message
+            }
+            return render(request, "search.html", context)

@@ -23,7 +23,7 @@ def get_paintings_by_id(request, id):
         return JsonResponse(data, safe=False)
     else:
         message = "must use GET"
-        return JsonResponse({'message':message}, status=400)
+        return JsonResponse({'message':message}, status=400, safe=False)
 
 
 @csrf_exempt

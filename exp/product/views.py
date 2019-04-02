@@ -1,9 +1,11 @@
 from django.shortcuts import render
 import requests
 import json
+from kafka import KafkaProducer
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from elasticsearch import Elasticsearch
 # Create your views here.
 
 
@@ -40,6 +42,10 @@ def create_painting(request):
         response = requests.post('http://models-api:8000/api/v1/paintings/create/', data=post_data)
         status = response.status_code
         if status == 200:
+            producer = KafkaProducer(bootstrap_servers='kafka:9092')
+            response = requests.get('http://models-api:8000/api/v1/paintings/latest/1')
+            json_data = json.loads(response.text)
+            producer.send('painting-topic', json.dumps(json_data).encode('utf-8'))
             return JsonResponse({'status': 200, 'login': 1, 'message': "Success"}, safe=False, status=200)
         else:
             return JsonResponse({'status': 400, 'login': 1, 'message': "Error"}, safe=False, status=400)
@@ -114,3 +120,22 @@ def get_all_artists(request):
         del element['dob']
         del element['dod']
     return JsonResponse(json_data, safe=False)
+
+@csrf_exempt
+def search_painting(request):
+    if request.method == "POST":
+        es = Elasticsearch(['es'])
+        query = request.POST['query']
+        json_data = es.search(index='painting_index', body={'query': {'query_string': {'query': query}}, 'size': 10})
+        results = json_data['hits']['hits']
+        if not results:
+            return JsonResponse([], safe=False)
+        else:
+            for i in results:
+                painting_id = (i.get('_source', {}).get('id'))
+                response = requests.get('http://models-api:8000/api/v1/paintings/' + str(painting_id) + '/')
+                json_data = json.loads(response.text)
+                return JsonResponse(json_data, safe=False)
+
+    if request.method == "GET":
+        return HttpResponse("Has to be a POST Request")

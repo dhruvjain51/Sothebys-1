@@ -34,10 +34,37 @@ services:
     network_mode: "bridge"
     links:
       - models:models-api
+      - kafka:kafka
+      - es:es
     command: >
       bash -c "mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/exp/wsgi.py"
     volumes:
       - ./exp:/app
     ports:
       - "8002:8000"
+  kafka:
+    image: spotify/kafka
+    container_name: kafka
+    network_mode: "bridge"
+    environment:
+      ADVERTISED_HOST: kafka
+      ADVERTISED_PORT: 9092
+    hostname: kafka
+  es:
+    image: elasticsearch:2.0
+    network_mode: "bridge"
+    container_name: es
+    ports:
+      - "9200:9200"
+  batch:
+    build: ./batch/.
+    network_mode: "bridge"
+    container_name: batch
+    restart: always
+    depends_on:
+      - "kafka"
+    links:
+      - kafka:kafka
+      - es:es
+      - exp:exp
 
