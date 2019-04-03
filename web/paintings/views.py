@@ -81,6 +81,7 @@ def get_search_results(request):
             }
             return render(request, "search.html", context)
         else:
+
             message = "Here are you search results"
             context = {
                 "query": r.json,

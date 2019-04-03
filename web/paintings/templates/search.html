@@ -13,11 +13,11 @@
 <div class="col-lg-4 col-md-4 center-block" style = "margin-top:10px;">
 
   <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{{painting.image}}" height="200" alt="Card image cap">
+    <img class="card-img-top" src="{{painting.0.image}}" height="200" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title">{{painting.title}}</h5>
-      <p class="card-text">{{painting.description}}</p>
-      <a href="/product/{{painting.id}}" class="btn btn-primary">See Painting</a>
+      <h5 class="card-title">{{painting.0.title}}</h5>
+      <p class="card-text">{{painting.0.description}}</p>
+      <a href="/product/{{painting.0.id}}" class="btn btn-primary">See Painting</a>
     </div>
   </div>
 

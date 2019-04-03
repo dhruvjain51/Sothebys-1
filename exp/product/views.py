@@ -139,12 +139,14 @@ def search_painting(request):
         if not results:
             return JsonResponse([], safe=False)
         else:
+            paintings = []
             for i in results:
                 painting_id = (i.get('_source', {}).get('id'))
                 response = requests.get(
                     'http://models-api:8000/api/v1/paintings/' + str(painting_id) + '/')
                 json_data = json.loads(response.text)
-                return JsonResponse(json_data, safe=False)
+                paintings.append(json_data)
+            return JsonResponse(paintings, safe=False)
 
     if request.method == "GET":
         return HttpResponse("Has to be a POST Request")
