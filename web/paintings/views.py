@@ -73,7 +73,7 @@ def get_search_results(request):
         return render(request, "search.html", context)
     else:
         r = requests.post('http://exp-api:8000/product/search/', data=post_data)
-        if r.json == []:
+        if r.text == "[]":
             message = "No valid results"
             context = {
                 "query": "",
