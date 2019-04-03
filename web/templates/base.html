@@ -26,6 +26,10 @@
           <a class="nav-link" style="color:white;" href="http://localhost:8000/paintings/create/">Create Listing</a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link" style="color:white;" href="http://localhost:8000/paintings/all/">Browse</a>
+        </li>
+
       </ul>
       <form class="form-inline my-2 my-lg-0" action="{% url 'paintings:search_paintings' %}" method='post'>
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">

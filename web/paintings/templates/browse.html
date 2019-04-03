@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+    {% load crispy_forms_tags %}
+{% block content %}
+<html lang="en">
+  <body>
+    <br>
+    <div class="container">
+      <br>
+      {% for painting in paintings %}
+      <div class="card">
+        <div class="row no-gutters">
+        <div class="col-auto">
+          <img src="{{painting.image}}" width="200" height="200" class="img-fluid" alt="">
+        </div>
+        <div class="col">
+          <div class="card-block px-2">
+            <h4 class="card-title">{{painting.title}}</h4>
+            <p class="card-text">{{painting.description}}</p>
+            <a href="/product/{{painting.id}}" class="btn btn-primary">Show Painting</a>
+          </div>
+        </div>
+        </div>
+      </div>
+
+        <br>
+
+      {% endfor %}
+
+    </div>
+</body>
+</html>
+{% endblock %}

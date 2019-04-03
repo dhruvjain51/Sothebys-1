@@ -7,6 +7,12 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 
 
+def all_paintings(request):
+    if request.method == "GET":
+        r = requests.get('http://exp-api:8000/product/all/')
+        return render(request, "browse.html", {'paintings': r.json})
+
+
 def create_painting(request):
     auth = request.COOKIES.get('auth')
     if not auth:
@@ -52,6 +58,7 @@ def create_painting_exp_api(auth, title, image, description, medium, price, arti
     return json_data
     # Call Exp API, pass everything form data.
     # Get result, return json result
+
 
 @csrf_exempt
 def get_search_results(request):

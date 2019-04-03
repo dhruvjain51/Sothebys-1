@@ -18,6 +18,12 @@ def get_paintings(request, id):
     return JsonResponse(json_data, safe=False)
 
 
+def get_all_paintings(request):
+    response = requests.get('http://models-api:8000/api/v1/paintings/')
+    json_data = json.loads(response.text)
+    return JsonResponse(json_data, safe=False)
+
+
 @csrf_exempt
 def create_painting(request):
     if request.method == "POST":
@@ -121,19 +127,22 @@ def get_all_artists(request):
         del element['dod']
     return JsonResponse(json_data, safe=False)
 
+
 @csrf_exempt
 def search_painting(request):
     if request.method == "POST":
         es = Elasticsearch(['es'])
         query = request.POST['query']
-        json_data = es.search(index='painting_index', body={'query': {'query_string': {'query': query}}, 'size': 10})
+        json_data = es.search(index='painting_index', body={
+                              'query': {'query_string': {'query': query}}, 'size': 10})
         results = json_data['hits']['hits']
         if not results:
             return JsonResponse([], safe=False)
         else:
             for i in results:
                 painting_id = (i.get('_source', {}).get('id'))
-                response = requests.get('http://models-api:8000/api/v1/paintings/' + str(painting_id) + '/')
+                response = requests.get(
+                    'http://models-api:8000/api/v1/paintings/' + str(painting_id) + '/')
                 json_data = json.loads(response.text)
                 return JsonResponse(json_data, safe=False)
 
