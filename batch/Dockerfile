@@ -4,4 +4,6 @@ WORKDIR /app
 
 COPY search.py /app/
 
-CMD [ "python", "search.py" ]
+COPY wait-for-it.sh /app/
+
+RUN chmod +x wait-for-it.sh

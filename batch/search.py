@@ -1,6 +1,8 @@
 from kafka import KafkaConsumer
 from elasticsearch import Elasticsearch
 import json
+import time
+
 
 es = Elasticsearch(['es'])
 consumer = KafkaConsumer('painting-topic', group_id='painting-indexer', bootstrap_servers=['kafka:9092'])

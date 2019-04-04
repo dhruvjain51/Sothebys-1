@@ -32,12 +32,14 @@ services:
     build: ./exp/.
     container_name: exp
     network_mode: "bridge"
+    restart: always
     links:
       - models:models-api
       - kafka:kafka
       - es:es
     command: >
-      bash -c "mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/exp/wsgi.py"
+      bash -c "./wait-for-it.sh es:9200 --timeout=20 --strict -- python setup.py
+      && mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/exp/wsgi.py"
     volumes:
       - ./exp:/app
     ports:
@@ -60,7 +62,8 @@ services:
     build: ./batch/.
     network_mode: "bridge"
     container_name: batch
-    restart: always
+    command: >
+      bash -c "./wait-for-it.sh kafka:9092 --timeout=20 --strict -- python search.py"
     depends_on:
       - "kafka"
     links:
