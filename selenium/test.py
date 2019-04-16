@@ -1,24 +1,35 @@
-import unittest
+import socket
+
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.test import override_settings, tag
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-class LoginTest(unittest.TestCase):
-    """docstring forLoginTest."""
-    def setUp(self):
-        self.driver = webdriver.Chrome()
 
-    def test_login(self):
-        driver = self.driver
-        driver.get("http://localhost:8000/login/")
-        email = driver.find_element_by_name("email")
-        email.send_keys("roman.sharykin@gmial.com")
-        pwd = driver.find_element_by_name("password")
-        pwd.send_keys("password")
-        pwd.send_keys(Keys.RETURN)
-        assert driver.current_url == "http://localhost:8000/login/"
+@override_settings(ALLOWED_HOSTS=['*'])  # Disable ALLOW_HOSTS
+class BaseTestCase(StaticLiveServerTestCase):
+    """
+    Provides base test class which connects to the Docker
+    container running Selenium.
+    """
+    host = '0.0.0.0'  # Bind to 0.0.0.0 to allow external access
 
-    def tearDown(self):
-        self.driver.close()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        # Set host to externally accessible web server address
+        cls.host = socket.gethostbyname(socket.gethostname())
 
-if __name__ == "__main__":
-    unittest.main()
+        # Instantiate the remote WebDriver
+        cls.selenium = webdriver.Remote(
+            command_executor='http://selenium-chrome:4444/wd/hub',
+            # Set to CHROME since we are using the Chrome container
+            desired_capabilities=DesiredCapabilities.CHROME,
+
+        )
+        cls.selenium.implicitly_wait(5)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super().tearDownClass()

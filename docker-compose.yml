@@ -59,16 +59,19 @@ services:
     ports:
       - "9200:9200"
   selenium-test:
-    image: tp33/django
+    build: ./selenium/.
+    network_mode: "bridge"
     container_name: selenium-test
     links:
       - selenium-chrome:selenium-chrome
       - web:web
     volumes:
       - ./selenium:/app
-    command: bash -c "pip install selenium==3.14.0 && python test.py"
+    command: >
+      bash -c "./wait-for-it.sh selenium-chrome:4444 --timeout=20 --strict -- pip install selenium==3.14.0 && python test.py"
   selenium-chrome:
     image: selenium/standalone-chrome
+    network_mode: "bridge"
     container_name: selenium-chrome
     links:
       - web:web
