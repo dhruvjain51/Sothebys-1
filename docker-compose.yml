@@ -58,25 +58,6 @@ services:
     container_name: es
     ports:
       - "9200:9200"
-  selenium-test:
-    build: ./selenium/.
-    network_mode: "bridge"
-    container_name: selenium-test
-    links:
-      - selenium-chrome:selenium-chrome
-      - web:web
-    volumes:
-      - ./selenium:/app
-    command: >
-      bash -c "./wait-for-it.sh selenium-chrome:4444 --timeout=20 --strict -- pip install selenium==3.14.0 && python test.py"
-  selenium-chrome:
-    image: selenium/standalone-chrome
-    network_mode: "bridge"
-    container_name: selenium-chrome
-    links:
-      - web:web
-    ports:
-      - "4444:4444"
   batch:
     build: ./batch/.
     network_mode: "bridge"
@@ -89,3 +70,24 @@ services:
       - kafka:kafka
       - es:es
       - exp:exp
+  selenium-test:
+    image: tp33/django
+    build: ./selenium_test/.
+    network_mode: "bridge"
+    container_name: selenium-test
+    links:
+      - selenium-chrome:selenium-chrome
+      - web:web
+      - es:es
+    volumes:
+      - ./selenium_test:/app
+    command: >
+      bash -c "./wait-for-it.sh es:9200 --timeout=30 --strict -- pip install selenium && python manage.py test tests"
+  selenium-chrome:
+    image: selenium/standalone-chrome
+    network_mode: "bridge"
+    container_name: selenium-chrome
+    links:
+      - web:web
+    ports:
+      - "4444:4444"
