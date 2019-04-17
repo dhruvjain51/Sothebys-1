@@ -43,6 +43,17 @@ class WebTestCase(TestCase):
         url = browser.current_url
 
         self.assertIn('http://web:8000', url)
+        browser.quit()
+
+    def test_go_to_signup(self):
+        browser = webdriver.Remote(command_executor='http://selenium-chrome:4444/wd/hub', desired_capabilities=DesiredCapabilities.CHROME)
+
+        browser.get('http://web:8000/login/')
+        register = browser.find_element_by_link_text("Register")
+        register.click()
+        url = browser.current_url
+        self.assertIn('http://web:8000/login/s/', url)
+        browser.quit()
 
     def tearDown(self):
         pass
