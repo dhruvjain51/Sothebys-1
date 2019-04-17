@@ -1,0 +1,10 @@
+language: python
+python:
+  - '3.6'
+services:
+  - docker
+install:
+  - docker-compose -f db-compose.yml up
+  - docker-compose up
+script:
+  - docker-compose run models python manage.py test

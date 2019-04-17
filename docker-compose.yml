@@ -70,4 +70,3 @@ services:
       - kafka:kafka
       - es:es
       - exp:exp
-
