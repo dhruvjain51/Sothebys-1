@@ -7,6 +7,6 @@ services:
 install:
   - sudo service mysql stop
   - docker-compose -f db-compose.yml up -d
-  - docker-compose -f db-compose up -d
+  - docker-compose up -d
 script:
   - docker-compose run models python manage.py test
