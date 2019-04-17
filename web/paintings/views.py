@@ -5,14 +5,15 @@ import requests
 from django.urls import reverse
 import json
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.cache import cache_page
 
-
+@cache_page(60 * 15)
 def all_paintings(request):
     if request.method == "GET":
         r = requests.get('http://exp-api:8000/product/all/')
         return render(request, "browse.html", {'paintings': r.json})
 
-
+@cache_page(60 * 15)
 def create_painting(request):
     auth = request.COOKIES.get('auth')
     if not auth:

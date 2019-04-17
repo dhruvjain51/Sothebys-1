@@ -22,7 +22,7 @@ services:
     network_mode: "bridge"
     links:
       - exp:exp-api
-      - redis
+      - redis:redis
     command: >
       bash -c "mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/web/wsgi.py"
     volumes:
@@ -97,5 +97,5 @@ services:
     container_name: redis
     network_mode: "bridge"
     hostname: redis
-    ports:
-        - 6379:6379
+    expose:
+      - "6379"
