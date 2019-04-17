@@ -1,9 +1,11 @@
+
 language: python
 python:
   - '3.6'
 services:
   - docker
 install:
+  - sudo service mysql stop
   - docker-compose -f db-compose.yml up
   - docker-compose up
 script:
