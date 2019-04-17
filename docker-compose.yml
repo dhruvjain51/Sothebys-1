@@ -28,6 +28,18 @@ services:
       - ./web:/app
     ports:
       - "8000:8000"
+  web2:
+    build: ./web/.
+    container_name: web2
+    network_mode: "bridge"
+    links:
+      - exp:exp-api
+    command: >
+      bash -c "mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/web/wsgi.py"
+    volumes:
+      - ./web:/app
+    ports:
+      - "8003:8000"
   exp:
     build: ./exp/.
     container_name: exp
@@ -70,3 +82,14 @@ services:
       - kafka:kafka
       - es:es
       - exp:exp
+  haproxy:
+    build: ./haproxy/.
+    network_mode: "bridge"
+    container_name: haproxy
+    links:
+      - web:web
+      - web2:web2
+    volumes:
+      - ./haproxy:/app
+    ports:
+      - "80:80"
