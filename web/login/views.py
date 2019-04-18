@@ -4,9 +4,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 import requests
 from django.urls import reverse
 import json
+from django.views.decorators.cache import cache_page
 
 
 # Create your views here.
+@cache_page(60 * 15)
 def get_login(request):
     if request.method == "POST":
         form = SellerLoginForm(request.POST)
@@ -35,7 +37,7 @@ def login_exp_api(email, password):
     json_data = json.loads(response.text)
     return json_data
 
-
+@cache_page(60 * 15)
 def get_signup(request):
     if request.method == "POST":
         form = SellerRegisterForm(request.POST)

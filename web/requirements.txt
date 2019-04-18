@@ -1,2 +1,4 @@
 requests
 django-crispy-forms
+redis
+django-redis

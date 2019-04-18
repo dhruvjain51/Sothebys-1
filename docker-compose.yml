@@ -22,6 +22,7 @@ services:
     network_mode: "bridge"
     links:
       - exp:exp-api
+      - redis:redis
     command: >
       bash -c "mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/web/wsgi.py"
     volumes:
@@ -82,6 +83,34 @@ services:
       - kafka:kafka
       - es:es
       - exp:exp
+  selenium-test:
+    image: tp33/django
+    build: ./selenium_test/.
+    network_mode: "bridge"
+    container_name: selenium-test
+    links:
+      - selenium-chrome:selenium-chrome
+      - web:web
+      - es:es
+    volumes:
+      - ./selenium_test:/app
+    command: >
+      bash -c "./wait-for-it.sh es:9200 --timeout=30 --strict -- pip install selenium && python manage.py test tests"
+  selenium-chrome:
+    image: selenium/standalone-chrome
+    network_mode: "bridge"
+    container_name: selenium-chrome
+    links:
+      - web:web
+    ports:
+      - "4444:4444"
+  redis:
+    image: redis
+    container_name: redis
+    network_mode: "bridge"
+    hostname: redis
+    expose:
+      - "6379"
   haproxy:
     build: ./haproxy/.
     network_mode: "bridge"
