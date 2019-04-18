@@ -111,7 +111,6 @@ services:
     hostname: redis
     expose:
       - "6379"
-=======
   haproxy:
     build: ./haproxy/.
     network_mode: "bridge"
