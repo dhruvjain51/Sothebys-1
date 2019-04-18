@@ -1,0 +1,1 @@
+GRANT ALL PRIVILEGES ON test_cs4501.* TO 'www'@'%';
