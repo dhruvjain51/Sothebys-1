@@ -12,6 +12,13 @@ from elasticsearch import Elasticsearch
 def get_paintings(request, id):
     response = requests.get('http://models-api:8000/api/v1/paintings/' + str(id) + '/')
     json_data = json.loads(response.text)
+    user = request.user.id
+    producer = KafkaProducer(bootstrap_servers='kafka:9092')
+    kafka_data = {
+        'user_id': str(user),
+        'painting_id': str(id)
+    }
+    producer.send('recommendation-topic', json.dumps(kafka_data).encode('utf-8'))
     for element in json_data:
         element['artist_name'] = get_painting_artist(int(element['artist_id']))
         element['seller_name'] = get_painting_seller(int(element['seller_id']))

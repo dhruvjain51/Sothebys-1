@@ -124,7 +124,9 @@ services:
       - "80:80"
   spark-master:
     image: gettyimages/spark
-    command: bin/spark-class org.apache.spark.deploy.master.Master -h spark-master
+    command: >
+      bash -c "bin/spark-class org.apache.spark.deploy.master.Master -h spark-master
+      && ./wait-for-it.sh kafka:9092 --timeout=20 --strict -- python /tmp/data/kafka.py"
     container_name: spark-master
     hostname: spark-master
     environment:
@@ -148,7 +150,9 @@ services:
       - ./data:/tmp/data
   spark-worker:
     image: gettyimages/spark
-    command: bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    command: >
+      bash -c "bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+      && ./wait-for-it.sh kafka:9092 --timeout=20 --strict -- python /tmp/data/kafka.py"
     container_name: spark-worker
     hostname: spark-worker
     environment:

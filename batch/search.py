@@ -12,5 +12,3 @@ for message in consumer:
     es.index(index='painting_index', doc_type='listing', id=painting.get('id'), body=painting)
     es.indices.refresh(index="painting_index")
 
-# consumer1 = KafkaConsumer('painting-load', group_id='painting-indexer', bootstrap_servers=['kafka:9092'])
-# json_data = (json.loads((consumer1.value).decode('utf-8')))
