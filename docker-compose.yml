@@ -126,7 +126,7 @@ services:
     image: gettyimages/spark
     command: >
       bash -c "bin/spark-class org.apache.spark.deploy.master.Master -h spark-master
-      && ./wait-for-it.sh kafka:9092 --timeout=20 --strict -- python /tmp/data/kafka.py"
+      && ./wait-for-it.sh kafka:9092 --timeout=20 --strict && ./spark.sh"
     container_name: spark-master
     hostname: spark-master
     environment:
@@ -152,7 +152,7 @@ services:
     image: gettyimages/spark
     command: >
       bash -c "bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
-      && ./wait-for-it.sh kafka:9092 --timeout=20 --strict -- python /tmp/data/kafka.py"
+      && ./wait-for-it.sh kafka:9092 --timeout=20 --strict && ./spark.sh"
     container_name: spark-worker
     hostname: spark-worker
     environment:
