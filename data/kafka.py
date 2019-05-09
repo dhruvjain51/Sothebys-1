@@ -1,7 +1,5 @@
-from kafka import KafkaConsumer
+from data.kafka import KafkaConsumer
 import json
-import time
-
 
 consumer = KafkaConsumer('recommendation-topic', group_id='recommendation-indexer', bootstrap_servers=['kafka:9092'])
 for message in consumer:
